@@ -1,3 +1,33 @@
+const rockButton = document.createElement("button");
+rockButton.textContent = "Rock";
+function playRoundWithRock() {
+  playRound("rock", getComputerChoice());
+}
+rockButton.addEventListener("click", playRoundWithRock);
+
+const paperButton = document.createElement("button");
+paperButton.textContent = "Paper";
+function playRoundWithPaper() {
+  playRound("paper", getComputerChoice());
+}
+paperButton.addEventListener("click", playRoundWithPaper);
+
+const scissorsButton = document.createElement("button");
+scissorsButton.textContent = "Scissors";
+function playRoundWithScissors() {
+  playRound("scissors", getComputerChoice());
+}
+scissorsButton.addEventListener("click", playRoundWithScissors);
+
+const resultsDisplay = document.createElement("div");
+function log(text) {
+  const textContainer = document.createElement("div");
+  textContainer.append(text + "\n");
+  resultsDisplay.append(textContainer);
+}
+
+document.body.append(rockButton, paperButton, scissorsButton, resultsDisplay);
+
 function getComputerChoice() {
   const numberChoice = Math.floor(Math.random() * 3);
   switch (numberChoice) {
@@ -56,57 +86,51 @@ function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function playGame() {
-  let computerScore = 0;
-  let humanScore = 0;
+let computerScore = 0;
+let humanScore = 0;
 
-  function playRound(humanChoice, computerChoice) {
-    const normalizedHumanChoice = humanChoice.toLowerCase();
-    const result = getRoundResult(normalizedHumanChoice, computerChoice);
-    if (result === "win") {
-      console.log(
-        `You win! ${capitalize(normalizedHumanChoice)} beats ${computerChoice}`
-      );
-      ++humanScore;
-      return;
-    }
-    if (result === "lose") {
-      console.log(
-        `You lose! ${capitalize(
-          normalizedHumanChoice
-        )} loses to ${computerChoice}`
-      );
-      ++computerScore;
-      return;
-    }
-    if (result === "tie") {
-      console.log(
-        `You tie! ${capitalize(normalizedHumanChoice)} equals ${computerChoice}`
-      );
-      return;
-    }
+function playRound(humanChoice, computerChoice) {
+  const normalizedHumanChoice = humanChoice.toLowerCase();
+  const result = getRoundResult(normalizedHumanChoice, computerChoice);
+  if (result === "win") {
+    log(
+      `You win! ${capitalize(normalizedHumanChoice)} beats ${computerChoice}`
+    );
+    ++humanScore;
+    return;
   }
+  if (result === "lose") {
+    log(
+      `You lose! ${capitalize(
+        normalizedHumanChoice
+      )} loses to ${computerChoice}`
+    );
+    ++computerScore;
+    return;
+  }
+  if (result === "tie") {
+    log(
+      `You tie! ${capitalize(normalizedHumanChoice)} equals ${computerChoice}`
+    );
+    return;
+  }
+}
 
-  for (let i = 0; i < 5; ++i) {
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-    playRound(humanSelection, computerSelection);
+function checkResults() {
+  if (humanScore < 5 && computerScore < 5) {
+    return;
   }
 
   if (humanScore > computerScore) {
-    console.log(
-      `You win! Your score: ${humanScore}, computer score: ${computerScore}`
-    );
+    log(`You win! Your score: ${humanScore}, computer score: ${computerScore}`);
     return;
   }
   if (humanScore === computerScore) {
-    console.log(
-      `Tie! Your score: ${humanScore}, computer score: ${computerScore}`
-    );
+    log(`Tie! Your score: ${humanScore}, computer score: ${computerScore}`);
     return;
   }
   if (humanScore < computerScore) {
-    console.log(
+    log(
       `You lose! Your score: ${humanScore}, computer score: ${computerScore}`
     );
     return;
