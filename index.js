@@ -29,6 +29,12 @@ function log(text) {
   resultsDisplay.append(textContainer);
 }
 
+function disableUi() {
+  rockButton.disabled = true;
+  paperButton.disabled = true;
+  scissorsButton.disabled = true;
+}
+
 document.body.append(rockButton, paperButton, scissorsButton, resultsDisplay);
 
 function getComputerChoice() {
@@ -126,16 +132,19 @@ function checkResults() {
 
   if (humanScore > computerScore) {
     log(`You win! Your score: ${humanScore}, computer score: ${computerScore}`);
+    disableUi();
     return;
   }
   if (humanScore === computerScore) {
     log(`Tie! Your score: ${humanScore}, computer score: ${computerScore}`);
+    disableUi();
     return;
   }
   if (humanScore < computerScore) {
     log(
       `You lose! Your score: ${humanScore}, computer score: ${computerScore}`
     );
+    disableUi();
     return;
   }
 }
