@@ -2,6 +2,7 @@ const rockButton = document.createElement("button");
 rockButton.textContent = "Rock";
 function playRoundWithRock() {
   playRound("rock", getComputerChoice());
+  checkResults();
 }
 rockButton.addEventListener("click", playRoundWithRock);
 
@@ -9,6 +10,7 @@ const paperButton = document.createElement("button");
 paperButton.textContent = "Paper";
 function playRoundWithPaper() {
   playRound("paper", getComputerChoice());
+  checkResults();
 }
 paperButton.addEventListener("click", playRoundWithPaper);
 
@@ -16,6 +18,7 @@ const scissorsButton = document.createElement("button");
 scissorsButton.textContent = "Scissors";
 function playRoundWithScissors() {
   playRound("scissors", getComputerChoice());
+  checkResults();
 }
 scissorsButton.addEventListener("click", playRoundWithScissors);
 
